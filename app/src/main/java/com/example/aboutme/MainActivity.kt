@@ -1,6 +1,5 @@
 package com.example.aboutme
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,9 +12,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val myName: MyName = MyName("Stefan Antonijevic")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.myName = myName
 
         binding.doneButton.setOnClickListener{
             addNickname(it)
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun addNickname(view: View){
         binding.apply{
+            myName?.nickname = nicknameEdit.text.toString()
             binding.nicknameText.text = binding.nicknameEdit.text
             invalidateAll()
             binding.nicknameEdit.visibility = View.GONE
